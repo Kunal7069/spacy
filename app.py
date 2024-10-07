@@ -8,7 +8,7 @@ nlp = spacy.load("en_core_web_sm")
 
 # Define action synonyms
 call_synonyms = ["call", "dial", "make a phone call to", "ring", "place a call to"]
-camera_synonyms = ["open the camera", "launch the camera", "start the camera", "activate the camera", "use the camera"]
+camera_synonyms = ["open the camera","camera", "launch the camera", "start the camera", "activate the camera", "use the camera"]
 
 app = Flask(__name__)
 CORS(app)  # Enable CORS for the entire app
