@@ -1,0 +1,67 @@
+from flask import Flask, request, jsonify
+from flask_cors import CORS  # Import CORS
+import spacy
+
+# Load the English NLP model
+nlp = spacy.load("en_core_web_sm")
+
+# Define action synonyms
+call_synonyms = ["call", "dial", "make a phone call to", "ring", "place a call to"]
+camera_synonyms = ["open the camera", "launch the camera", "start the camera", "activate the camera", "use the camera"]
+
+app = Flask(__name__)
+CORS(app)  # Enable CORS for the entire app
+
+def extract_task(sentence):
+    doc = nlp(sentence)
+    
+    action = None
+    target = None
+    sentence_lower = sentence.lower()
+
+    for synonym in call_synonyms:
+        if synonym in sentence_lower:
+            action = "Call"
+            
+            for ent in doc.ents:
+                if ent.label_ == "PERSON":
+                    target = ent.text
+                    break
+            
+            if not target:
+                for token in doc:
+                    if token.pos_ == "PROPN":
+                        target = token.text
+                        break
+
+    for synonym in camera_synonyms:
+        if synonym in sentence_lower:
+            action = "Open the Camera"
+    
+    result = []
+    if action and target:
+        result.append(action)
+        result.append(target)
+        return result
+    elif action:
+        result.append(action)
+        return result
+    else:
+        result.append("NO ACTION")
+        return result
+
+@app.route('/extract-task', methods=['POST'])
+def handle_request():
+    # Get the JSON data from the request
+    data = request.get_json()
+    # Extract the sentence from the request body
+    sentence = data.get("sentence")
+    
+    if not sentence:
+        return jsonify({"error": "No sentence provided"}), 400
+
+    result = extract_task(sentence)
+    return jsonify(result)
+
+if __name__ == '__main__':
+    app.run(debug=True)
