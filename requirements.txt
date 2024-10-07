@@ -4,4 +4,4 @@ spacy==3.7.2
 spacy-alignments==0.9.1
 spacy-legacy==3.0.12
 spacy-loggers==1.0.5
-en-core-web-sm==3.5.0 
+en-core-web-sm
