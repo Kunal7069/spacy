@@ -1,6 +1,7 @@
 from flask import Flask, request, jsonify
 from flask_cors import CORS  # Import CORS
 import spacy
+import os
 
 # Load the English NLP model
 nlp = spacy.load("en_core_web_sm")
@@ -64,4 +65,5 @@ def handle_request():
     return jsonify(result)
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    port = int(os.environ.get('PORT', 5000))  # Default to 5000 if no PORT variable is found
+    app.run(host='0.0.0.0', port=port)
