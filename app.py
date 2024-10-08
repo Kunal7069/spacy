@@ -3,13 +3,12 @@ from flask_cors import CORS  # Import CORS
 import spacy
 import os
 
-# Load the English NLP model
 nlp = spacy.load("en_core_web_sm")
 
 # Define action synonyms
 call_synonyms = ["call", "dial", "make a phone call to", "ring", "place a call to"]
-camera_synonyms = ["open the camera","camera", "launch the camera", "start the camera", "activate the camera", "use the camera"]
-
+camera_synonyms = ["open the camera","camera","photo", "launch the camera", "start the camera", "activate the camera", "use the camera"]
+message_synonyms=  ["send a message", "send message", "text", "inbox","message", "send a text","reply", "respond", "answer the message", "reply to message"]
 app = Flask(__name__)
 CORS(app)  # Enable CORS for the entire app
 
@@ -34,6 +33,21 @@ def extract_task(sentence):
                     if token.pos_ == "PROPN":
                         target = token.text
                         break
+    
+    for synonym in message_synonyms:
+        if synonym in sentence_lower:
+            action = "Message"
+            
+            for ent in doc.ents:
+                if ent.label_ == "PERSON":
+                    target = ent.text
+                    break
+            
+            if not target:
+                for token in doc:
+                    if token.pos_ == "PROPN":
+                        target = token.text
+                    
 
     for synonym in camera_synonyms:
         if synonym in sentence_lower:
@@ -63,7 +77,6 @@ def handle_request():
 
     result = extract_task(sentence)
     return jsonify(result)
-
 if __name__ == '__main__':
     port = int(os.environ.get('PORT', 5000))  # Default to 5000 if no PORT variable is found
     app.run(host='0.0.0.0', port=port)
