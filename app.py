@@ -1,17 +1,16 @@
 from flask import Flask, request, jsonify
 from flask_cors import CORS  # Import CORS
 import spacy
-import os
 
+# Load the English NLP model
 nlp = spacy.load("en_core_web_sm")
 
 # Define action synonyms
 call_synonyms = ["call", "dial", "make a phone call to", "ring", "place a call to"]
 camera_synonyms = ["open the camera","camera","photo", "launch the camera", "start the camera", "activate the camera", "use the camera"]
 message_synonyms=  ["send a message", "send message", "text", "inbox","message", "send a text", "respond", "answer the message", "reply to message"]
-email_synonyms=["Read the latest mail","Read latest mail","Read latest email","Read latest","Read the last mail"]
-reply_synonyms=['Reply the latest mail','Reply latest mail','Reply mail','Reply the mail','Reply the last mail','Reply last mail']
-
+email_synonyms=["read the latest mail","read latest mail","read latest email","read latest","read the last mail"]
+reply_synonyms=['reply the latest mail','reply latest mail','reply mail','reply the mail','reply the last mail','reply last mail']
 app = Flask(__name__)
 CORS(app)  # Enable CORS for the entire app
 
@@ -50,16 +49,20 @@ def extract_task(sentence):
                 for token in doc:
                     if token.pos_ == "PROPN":
                         target = token.text
-    for synonym in reply_synonyms:
-        if synonym in sentence_lower:
-            action = "Reply the Latest Mail"                
+                    
 
     for synonym in camera_synonyms:
         if synonym in sentence_lower:
             action = "Open the Camera"
+    
     for synonym in email_synonyms:
         if synonym in sentence_lower:
             action = "Read the Latest Mail"
+            
+    for synonym in reply_synonyms:
+        if synonym in sentence_lower:
+            action = "Reply the Latest Mail"
+    
     result = []
     if action and target:
         result.append(action)
@@ -84,6 +87,6 @@ def handle_request():
 
     result = extract_task(sentence)
     return jsonify(result)
+
 if __name__ == '__main__':
-    port = int(os.environ.get('PORT', 5000))  # Default to 5000 if no PORT variable is found
-    app.run(host='0.0.0.0', port=port)
+    app.run(debug=True)
