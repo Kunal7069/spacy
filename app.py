@@ -8,8 +8,9 @@ nlp = spacy.load("en_core_web_sm")
 # Define action synonyms
 call_synonyms = ["call", "dial", "make a phone call to", "ring", "place a call to"]
 camera_synonyms = ["open the camera","camera","photo", "launch the camera", "start the camera", "activate the camera", "use the camera"]
-message_synonyms=  ["send a message", "send message", "text", "inbox","message", "send a text","reply", "respond", "answer the message", "reply to message"]
-email_synonyms=['Read the latese mail','latest mail','latest email','latest','mail','email','last mail','last email']
+message_synonyms=  ["send a message", "send message", "text", "inbox","message", "send a text", "respond", "answer the message", "reply to message"]
+email_synonyms=["Read the latest mail","Read latest mail","Read latest email","Read latest","Read the last mail"]
+reply_synonyms=['Reply the latest mail','Reply latest mail','Reply mail','Reply the mail','Reply the last mail','Reply last mail']
 
 app = Flask(__name__)
 CORS(app)  # Enable CORS for the entire app
@@ -49,7 +50,9 @@ def extract_task(sentence):
                 for token in doc:
                     if token.pos_ == "PROPN":
                         target = token.text
-                    
+    for synonym in reply_synonyms:
+        if synonym in sentence_lower:
+            action = "Reply the Latest Mail"                
 
     for synonym in camera_synonyms:
         if synonym in sentence_lower:
