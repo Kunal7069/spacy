@@ -9,8 +9,8 @@ nlp = spacy.load("en_core_web_sm")
 call_synonyms = ["call", "dial", "make a phone call to", "ring", "place a call to"]
 camera_synonyms = ["open the camera","camera","photo", "launch the camera", "start the camera", "activate the camera", "use the camera"]
 message_synonyms=  ["send a message", "send message", "text", "inbox","message", "send a text", "respond", "answer the message", "reply to message"]
-email_synonyms=["read the latest mail","read latest mail","read latest email","read latest","read the last mail"]
-reply_synonyms=['reply to latest mail','reply to latest mail','reply the latest mail','reply latest mail','reply mail','reply the mail','reply the last mail','reply last mail']
+email_synonyms=["read the latest mail","read latest mail","read latest email","read latest","read the last mail","read"]
+reply_synonyms=['reply','reply to latest mail','reply to latest mail','reply the latest mail','reply latest mail','reply mail','reply the mail','reply the last mail','reply last mail']
 app = Flask(__name__)
 CORS(app)  # Enable CORS for the entire app
 
