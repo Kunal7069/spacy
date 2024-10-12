@@ -11,6 +11,7 @@ camera_synonyms = ["open the camera","camera","photo", "launch the camera", "sta
 message_synonyms=  ["send a message", "send message", "text", "inbox","message", "send a text", "respond", "answer the message", "reply to message"]
 email_synonyms=["read the latest mail","read latest mail","read latest email","read latest","read the last mail","read"]
 reply_synonyms=['reply','reply to latest mail','reply to latest mail','reply the latest mail','reply latest mail','reply mail','reply the mail','reply the last mail','reply last mail']
+subject_mail_synonyms=['subject','read subject']
 app = Flask(__name__)
 CORS(app)  # Enable CORS for the entire app
 
@@ -62,6 +63,10 @@ def extract_task(sentence):
     for synonym in reply_synonyms:
         if synonym in sentence_lower:
             action = "Reply the Latest Mail"
+
+    for synonym in subject_mail_synonyms:
+        if synonym in sentence_lower:
+            action = "Read the Mail with Given Subject"
     
     result = []
     if action and target:
