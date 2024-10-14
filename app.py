@@ -73,7 +73,7 @@ def extract_task(sentence):
         if synonym in sentence_lower:
             action = "Open the Youtube"
     
-  for synonym in playstore_synonyms:
+    for synonym in playstore_synonyms:
         if synonym in sentence_lower:
             action = "Open the PlayStore"
           
