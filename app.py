@@ -9,8 +9,8 @@ nlp = spacy.load("en_core_web_sm")
 calendar_synonyms = ["calendar", "date", "open the calendar", "open calendar","calendar app", "open the calendar app", "open calendar app"]
 settings_synonyms = ["settings", "setting", "open the settings", "open settings", "open the setting", "open setting",
                     "settings app", "setting app", "open the settings app", "open settings app", "open the setting app", "open setting app"]
-youtube_synonyms = ["youtube", "open the youtube", "open youtube", "youtube app", "open the youtube app"]
-playstore_synonyms = ["playstore", "open the playstore", "open playstore", "playstore app", "open the playstore app"]
+youtube_synonyms = ["you tube","youtube", "open the youtube", "open youtube", "youtube app", "open the youtube app"]
+playstore_synonyms = ["play store","playstore", "open the playstore", "open playstore", "playstore app", "open the playstore app"]
 call_synonyms = ["call", "dial", "make a phone call to", "ring", "place a call to","contacts"]
 camera_synonyms = ["open the camera","camera","photo", "launch the camera", "start the camera", "activate the camera", "use the camera"]
 message_synonyms=  ["send a message", "send message", "text", "inbox","message","messaging","send a text", "respond", "answer the message", "reply to message"]
