@@ -60,7 +60,23 @@ def extract_task(sentence):
     for synonym in camera_synonyms:
         if synonym in sentence_lower:
             action = "Open the Camera"
+
+    for synonym in calendar_synonyms:
+        if synonym in sentence_lower:
+            action = "Open the Calendar
+
+    for synonym in setttings_synonyms:
+        if synonym in sentence_lower:
+            action = "Open the Settings"
+
+    for synonym in youtube_synonyms:
+        if synonym in sentence_lower:
+            action = "Open the Youtube"
     
+  for synonym in playstore_synonyms:
+        if synonym in sentence_lower:
+            action = "Open the PlayStore"
+          
     for synonym in email_synonyms:
         if synonym in sentence_lower:
             action = "Read the Latest Mail"
