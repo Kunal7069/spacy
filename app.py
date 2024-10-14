@@ -65,7 +65,7 @@ def extract_task(sentence):
         if synonym in sentence_lower:
             action = "Open the Calendar"
 
-    for synonym in setttings_synonyms:
+    for synonym in settings_synonyms:
         if synonym in sentence_lower:
             action = "Open the Settings"
 
