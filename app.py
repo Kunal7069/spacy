@@ -11,7 +11,7 @@ settings_synonyms = ["settings", "setting", "open the settings", "open settings"
                     "settings app", "setting app", "open the settings app", "open settings app", "open the setting app", "open setting app"]
 youtube_synonyms = ["youtube", "open the youtube", "open youtube", "youtube app", "open the youtube app"]
 playstore_synonyms = ["playstore", "open the playstore", "open playstore", "playstore app", "open the playstore app"]
-call_synonyms = ["call", "dial", "make a phone call to", "ring", "place a call to","conatcts"]
+call_synonyms = ["call", "dial", "make a phone call to", "ring", "place a call to","contacts"]
 camera_synonyms = ["open the camera","camera","photo", "launch the camera", "start the camera", "activate the camera", "use the camera"]
 message_synonyms=  ["send a message", "send message", "text", "inbox","message","messaging","send a text", "respond", "answer the message", "reply to message"]
 email_synonyms=["read the latest mail","read latest mail","read latest email","read latest","read the last mail","read"]
