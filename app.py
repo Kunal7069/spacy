@@ -1,7 +1,10 @@
 from flask import Flask, request, jsonify
 from flask_cors import CORS  # Import CORS
 import spacy
+import threading
+import time
 import os
+import requests 
 # Load the English NLP model
 nlp = spacy.load("en_core_web_sm")
 
@@ -113,6 +116,31 @@ def handle_request():
 
     result = extract_task(sentence)
     return jsonify(result)
+
+
+def call_api_every_10_seconds():
+        while True:
+            # Replace this URL with the API endpoint you want to call
+            url = 'https://spacy-4.onrender.com'
+            try:
+                response = requests.get(url)
+                if response.status_code == 200:
+                    print('API call successful:', response.json())
+                else:
+                    print('API call failed with status code:', response.status_code)
+            except Exception as e:
+                print('Error during API call:', e)
+    
+            time.sleep(10)  # Wait for 10 seconds
+    
+    # Start the background thread
+threading.Thread(target=call_api_every_10_seconds, daemon=True).start()
+
+ @app.route('/', methods=['GET'])
+ def request():
+    return jsonify({"STATUS": "SPACY IS RUNNING"})
+    
+    
 
 if __name__ == '__main__':
     port = int(os.environ.get('PORT', 5000))  # Default to 5000 if no PORT variable is found
