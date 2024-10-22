@@ -140,9 +140,7 @@ def call_api_every_10_seconds():
     # Start the background thread
 threading.Thread(target=call_api_every_10_seconds, daemon=True).start()
 
- @app.route('/', methods=['GET'])
- def request():
-    return jsonify({"STATUS": "SPACY IS RUNNING"})
+ 
     
     
 
