@@ -105,7 +105,7 @@ def extract_task(sentence):
         return result
 
 @app.route('/', methods=['GET'])
-def request():
+def status():
     return jsonify({"STATUS": "SPACY IS RUNNING"})
 
 @app.route('/extract-task', methods=['POST'])
